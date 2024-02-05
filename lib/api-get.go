@@ -11,7 +11,7 @@ import (
 )
 
 func MainSystem(userId int64, apiPath string, data interface{}, result interface{}) ([]byte, error) {
-	apiUrl, _ := beego.AppConfig.String("KTVAI.APIUrl")
+	apiUrl, _ := beego.AppConfig.String("ShiPinLv.APIUrl")
 	return ApiGet(userId, apiUrl, apiPath, data, result)
 }
 
@@ -32,7 +32,7 @@ func SubsystemChatgptApi(userId int64, apiPath string, data interface{}, result 
 }
 
 func ApiGet(userId int64, apiUrl, apiPath string, data interface{}, result interface{}) ([]byte, error) {
-	//apiUrl := beego.AppConfig.String("KTVAI.APIUrl")
+	//apiUrl := beego.AppConfig.String("ShiPinLv.APIUrl")
 	url := apiUrl + strings.ToLower(apiPath)
 	req := httplib.Get(url)
 	req.SetTLSClientConfig(&tls.Config{InsecureSkipVerify: true})

@@ -4,4 +4,4 @@
 
 
 子系统访问主系统配置，子系统配置：
-- KTVAI.APIUrl
+- ShiPinLv.APIUrl
