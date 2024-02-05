@@ -2,6 +2,12 @@
 # https://github.com/github/gitignore/blob/main/community/Golang/Go.AllowList.gitignore
 #
 # Binaries for programs and plugins
+
+/go-component-shipinlv
+/go-component-shipinlv.*
+
+.idea
+
 *.exe
 *.exe~
 *.dll
