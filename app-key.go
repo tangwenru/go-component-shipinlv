@@ -31,9 +31,11 @@ func init() {
 
 }
 
-func (this *AppKey) DetailByUserId(userId int64) (*AppKeyDetail, error) {
+func (this *AppKey) DetailByUserId(userId int64, keyType string) (*AppKeyDetail, error) {
 	appKeyDetailResult := AppKeyDetailResult{}
-	query := map[string]string{}
+	query := map[string]string{
+		"keyType": keyType,
+	}
 	_, err := component_shipinlv_lib.MainSystem(userId, "appKey/detail", &query, &appKeyDetailResult)
 
 	appKeyDetail := AppKeyDetail{}
