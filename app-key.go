@@ -18,13 +18,13 @@ type AppKeyDetailResult struct {
 }
 
 type AppKeyDetail struct {
-	Id int64 `json:"id"`
+	//Id int64 `json:"id"`
 	//DealerId  int64 `json:"dealer_id"`
 	KeyType   string `json:"keyType"`
 	AppKey    string `json:"appKey"`
 	AppSecret string `json:"appSecret"`
-	Enabled   bool   `json:"enabled"`
-	Created   int64  `json:"created"`
+	//Enabled   bool   `json:"enabled"`
+	//Created   int64  `json:"created"`
 }
 
 func init() {
