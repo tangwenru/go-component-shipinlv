@@ -29,6 +29,7 @@ type UserDetail struct {
 	AppSid      string `json:"appSid"`
 	ClientSid   string `json:"clientSid"`
 	Created     int64  `json:"created"`
+	DealerId    int64  `json:"dealerId"`
 }
 
 func init() {
