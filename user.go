@@ -28,8 +28,8 @@ type UserDetail struct {
 	Role        string `json:"role"`
 	AppSid      string `json:"appSid"`
 	ClientSid   string `json:"clientSid"`
-	Created     int64  `json:"created"`
 	DealerId    int64  `json:"dealerId"`
+	Created     int64  `json:"created"`
 }
 
 func init() {
@@ -43,7 +43,7 @@ func (this *User) Detail(userId int64) (error, *UserDetail) {
 
 	userDetail := UserDetail{}
 	if err != nil {
-		fmt.Println("user info err:", err)
+		fmt.Println("shiPinLv user info err:", err)
 		return err, &userDetail
 	}
 
