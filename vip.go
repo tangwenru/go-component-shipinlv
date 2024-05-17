@@ -1,6 +1,7 @@
 package component_shipinlv
 
 import (
+	"errors"
 	"fmt"
 	//component_shipinlv_lib "component_shipinlv/lib"
 	component_shipinlv_lib "github.com/tangwenru/go-component-shipinlv/lib"
@@ -33,6 +34,12 @@ type VipDetailQuery struct {
 	ProductType string `json:"productType"`
 }
 
+type VipListResult struct {
+	Success bool      `json:"success"`
+	Message string    `json:"message"`
+	Data    []VipList `json:"data"`
+}
+
 func init() {
 
 }
@@ -41,13 +48,17 @@ func (this *Vip) ListByProductType(userId int64, productType string) (error, *[]
 	query := VipDetailQuery{
 		ProductType: productType,
 	}
-	userVipDetail := make([]VipList, 0)
+	vipListResult := VipListResult{}
 
-	bytesResult, err := component_shipinlv_lib.MainSystem(userId, "vip/listByProductType", &query, &userVipDetail)
+	bytesResult, err := component_shipinlv_lib.MainSystem(userId, "vip/listByProductType", &query, &vipListResult)
 
 	if err != nil {
 		fmt.Println("Vip ListByProductType err:", string(bytesResult), err)
 	}
 
-	return err, &userVipDetail
+	if !vipListResult.Success {
+		return errors.New(vipListResult.Message), nil
+	}
+
+	return err, &vipListResult.Data
 }
