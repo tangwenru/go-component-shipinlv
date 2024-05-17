@@ -46,7 +46,7 @@ func (this *Vip) ListByProductType(userId int64, productType string) (error, *[]
 	bytesResult, err := component_shipinlv_lib.MainSystem(userId, "vip/listByProductType", &query, &userVipDetail)
 
 	if err != nil {
-		fmt.Println("Vip ListByProductType:", string(bytesResult))
+		fmt.Println("Vip ListByProductType:", string(bytesResult), err)
 		//json.Unmarshal(bytesResult, &userVipDetail)
 	}
 
