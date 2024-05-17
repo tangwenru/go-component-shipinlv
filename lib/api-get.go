@@ -59,7 +59,7 @@ func ApiGet(userId int64, apiUrl, apiPath string, data interface{}, result inter
 
 	errJson := json.Unmarshal(bytesResult, result)
 	if errJson != nil {
-		fmt.Println("err 21:", errJson, bytesResult)
+		fmt.Println("err 21:", errJson, string(bytesResult))
 		return []byte(""), errJson
 	}
 
