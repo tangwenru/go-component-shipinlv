@@ -27,6 +27,7 @@ type VipList struct {
 	PropertyAmount        string  `json:"propertyAmount"` // 最大值
 	Recommend             int64   `json:"recommend"`
 	ShowContent           string  `json:"showContent"`
+	CanBuy                bool    `json:"canBuy"`
 	Enabled               bool    `json:"enabled"`
 }
 
