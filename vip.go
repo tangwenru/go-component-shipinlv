@@ -33,6 +33,7 @@ type VipList struct {
 
 type VipDetailQuery struct {
 	ProductType string `json:"productType"`
+	Domain      string `json:"domain"`
 }
 
 type VipListResult struct {
@@ -45,9 +46,10 @@ func init() {
 
 }
 
-func (this *Vip) ListByProductType(userId int64, productType string) (error, *[]VipList) {
+func (this *Vip) ListByProductType(userId int64, productType string, domain string) (error, *[]VipList) {
 	query := VipDetailQuery{
 		ProductType: productType,
+		Domain:      domain,
 	}
 	vipListResult := VipListResult{}
 
