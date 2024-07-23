@@ -7,6 +7,7 @@ import (
 	"fmt"
 	"github.com/beego/beego/v2/client/httplib"
 	beego "github.com/beego/beego/v2/server/web"
+	"regexp"
 	"strings"
 )
 
@@ -41,6 +42,12 @@ func ApiGet(userId int64, apiUrl, apiPath string, data interface{}, result inter
 	postData := Encrypt(string(dataByte))
 	req.Param("data", postData)
 	req.Param("userId", IdEncrypt(userId))
+
+	// 子系统名称
+	appName, _ := beego.AppConfig.String("appName")
+	reg := regexp.MustCompile("^api-")
+	subSystem := reg.ReplaceAllString(appName, "")
+	req.Param("subSystem", subSystem)
 
 	//fmt.Println("ApiGet:", global.IdEncrypt(userId), url, postData)
 
