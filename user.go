@@ -32,10 +32,6 @@ type UserDetail struct {
 	Created     int64  `json:"created"`
 }
 
-func init() {
-
-}
-
 func (this *User) Detail(userId int64) (error, *UserDetail) {
 	userDetailResult := UserDetailResult{}
 	query := map[string]string{}

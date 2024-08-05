@@ -5,6 +5,7 @@
 
 /go-component-shipinlv
 /go-component-shipinlv.*
+conf/app.conf
 
 .idea
 
