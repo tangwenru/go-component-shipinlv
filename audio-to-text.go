@@ -14,8 +14,9 @@ type AudioToText struct {
 }
 
 type AudioToTextDetail struct {
-	Id      int64  `json:"id"`
-	SrtText string `json:"srtText"`
+	Id           int64  `json:"id"`
+	WorkServerId int64  `json:"workServerId"`
+	SrtText      string `json:"srtText"`
 }
 
 type AudioToTextDetailResult struct {
@@ -79,19 +80,20 @@ func (this *AudioToText) Create(userId int64, query *AudioToTextCreateQuery) (*A
 	byteResult, err := req.Bytes()
 	if err != nil {
 		fmt.Println("get api:", err)
-		return nil, err
+		return nil, errors.New("识别字幕失败 0：" + err.Error())
 	}
 
 	resultData := AudioToTextApiResult{}
 	json.Unmarshal(byteResult, &resultData)
 
 	if !resultData.Success {
-		return nil, errors.New("识别字幕失败：" + resultData.Message)
+		return nil, errors.New("识别字幕失败 1：" + resultData.Message)
 	}
 
 	fmt.Println("api:", resultData)
 	outDetail := AudioToTextDetail{
-		SrtText: this.ApiResult2Srt(query.LineMaxLetter, &resultData),
+		WorkServerId: workServerDetail.Id,
+		SrtText:      this.ApiResult2Srt(query.LineMaxLetter, &resultData),
 	}
 
 	return &outDetail, nil
