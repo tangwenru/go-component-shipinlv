@@ -10,28 +10,28 @@ import (
 	"strings"
 )
 
-type Audio2Text struct {
+type AudioToText struct {
 }
 
-type Audio2TextDetail struct {
-	Id      int64 `json:"id"`
-	SrtText string
+type AudioToTextDetail struct {
+	Id      int64  `json:"id"`
+	SrtText string `json:"srtText"`
 }
 
-type Audio2TextDetailResult struct {
-	Success bool             `json:"success"`
-	Message string           `json:"message"`
-	Data    Audio2TextDetail `json:"data"`
+type AudioToTextDetailResult struct {
+	Success bool              `json:"success"`
+	Message string            `json:"message"`
+	Data    AudioToTextDetail `json:"data"`
 }
 
-type Audio2TextCreateQuery struct {
+type AudioToTextCreateQuery struct {
 	TaskId        int64  `json:"taskId"`
 	TaskType      string `json:"taskType"`
 	LineMaxLetter int    `json:"lineMaxLetter"`
 	AudioFilePath string `json:"audioFilePath"`
 }
 
-type Audio2TextApiResult struct {
+type AudioToTextApiResult struct {
 	Message string `json:"message,omitempty"`
 	Data    struct {
 		Query struct {
@@ -46,10 +46,10 @@ type Audio2TextApiResult struct {
 	Success bool `json:"success"`
 }
 
-func (this *Audio2Text) Create(userId int64, query *Audio2TextCreateQuery) (*Audio2TextDetail, error) {
+func (this *AudioToText) Create(userId int64, query *AudioToTextCreateQuery) (*AudioToTextDetail, error) {
 	// 先找一个 服务器
 	workServer := WorkServer{}
-	workServerDetail, errWorkServerDetail := workServer.RandDetail(userId, "audio2text")
+	workServerDetail, errWorkServerDetail := workServer.RandDetail(userId, "audio-to-text")
 	if errWorkServerDetail != nil {
 		return nil, errWorkServerDetail
 	}
@@ -58,7 +58,7 @@ func (this *Audio2Text) Create(userId int64, query *Audio2TextCreateQuery) (*Aud
 	if len(port) > 1 {
 		port = ":" + port
 	}
-	apiUrl := fmt.Sprintf("%s://%s%s/api-audio2text/audio2text",
+	apiUrl := fmt.Sprintf("%s://%s%s/api-audioTotext/audioTotext",
 		workServerDetail.DomainProtocol,
 		workServerDetail.Domain,
 		port,
@@ -82,7 +82,7 @@ func (this *Audio2Text) Create(userId int64, query *Audio2TextCreateQuery) (*Aud
 		return nil, err
 	}
 
-	resultData := Audio2TextApiResult{}
+	resultData := AudioToTextApiResult{}
 	json.Unmarshal(byteResult, &resultData)
 
 	if !resultData.Success {
@@ -90,14 +90,14 @@ func (this *Audio2Text) Create(userId int64, query *Audio2TextCreateQuery) (*Aud
 	}
 
 	fmt.Println("api:", resultData)
-	outDetail := Audio2TextDetail{
+	outDetail := AudioToTextDetail{
 		SrtText: this.ApiResult2Srt(query.LineMaxLetter, &resultData),
 	}
 
 	return &outDetail, nil
 }
 
-func (this *Audio2Text) ApiResult2Srt(lineMaxLetter int, data *Audio2TextApiResult) string {
+func (this *AudioToText) ApiResult2Srt(lineMaxLetter int, data *AudioToTextApiResult) string {
 	srtList := make([]string, 0)
 	//每行最多多少字
 	if lineMaxLetter < 1 {
