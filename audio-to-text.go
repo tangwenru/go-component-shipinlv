@@ -58,7 +58,7 @@ func (this *AudioToText) Create(userId int64, query *AudioToTextCreateQuery) (*A
 	if len(port) > 1 {
 		port = ":" + port
 	}
-	apiUrl := fmt.Sprintf("%s://%s%s/api-audioTotext/audioTotext",
+	apiUrl := fmt.Sprintf("%s://%s%s/api-audioToText/audioToText",
 		workServerDetail.DomainProtocol,
 		workServerDetail.Domain,
 		port,
