@@ -78,7 +78,7 @@ func (this *AudioToText) Create(userId int64, query *AudioToTextCreateQuery) (*A
 
 	byteResult, err := req.Bytes()
 	if err != nil {
-		fmt.Println("get api :", err)
+		fmt.Println("get api:", err)
 		return nil, err
 	}
 
