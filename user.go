@@ -49,3 +49,25 @@ func (this *User) Detail(userId int64) (error, *UserDetail) {
 
 	return err, &userDetailResult.Data
 }
+
+// 一个用户只能登录一个客户端
+func (this *User) DetailByOneClient(userId int64, productType, clientUniqueKey string) (error, *UserDetail) {
+	userDetailResult := UserDetailResult{}
+	query := map[string]string{
+		"productType":     productType,
+		"clientUniqueKey": clientUniqueKey,
+	}
+	_, err := component_shipinlv_lib.MainSystem(userId, "user/detailByOneClient", &query, &userDetailResult)
+
+	userDetail := UserDetail{}
+	if err != nil {
+		fmt.Println("shiPinLv user info err:", err)
+		return err, &userDetail
+	}
+
+	if !userDetailResult.Success {
+		return errors.New(userDetailResult.Message), &userDetail
+	}
+
+	return err, &userDetailResult.Data
+}
