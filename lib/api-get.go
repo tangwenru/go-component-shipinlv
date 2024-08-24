@@ -32,6 +32,14 @@ func SubsystemChatgptApi(userId int64, apiPath string, data interface{}, result 
 	return ApiGet(userId, apiUrl, apiPath, data, result)
 }
 
+func SubsystemLongVideoSales(userId int64, apiPath string, data interface{}, result interface{}) ([]byte, error) {
+	apiUrl, _ := beego.AppConfig.String("Subsystem.LongVideoSalesAPIUrl")
+	if len(apiUrl) < 5 {
+		return nil, errors.New("请配置 app.conf 文件的 Subsystem.LongVideoSalesAPIUrl")
+	}
+	return ApiGet(userId, apiUrl, apiPath, data, result)
+}
+
 func ApiGet(userId int64, apiUrl, apiPath string, data interface{}, result interface{}) ([]byte, error) {
 	//apiUrl := beego.AppConfig.String("ShiPinLv.APIUrl")
 	url := apiUrl + strings.ToLower(apiPath)
