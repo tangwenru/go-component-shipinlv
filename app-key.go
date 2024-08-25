@@ -18,13 +18,9 @@ type AppKeyDetailResult struct {
 }
 
 type AppKeyDetail struct {
-	//Id int64 `json:"id"`
-	//DealerId  int64 `json:"dealer_id"`
 	KeyType   string `json:"keyType"`
 	AppKey    string `json:"appKey"`
 	AppSecret string `json:"appSecret"`
-	//Enabled   bool   `json:"enabled"`
-	//Created   int64  `json:"created"`
 }
 
 func init() {
@@ -40,7 +36,7 @@ func (this *AppKey) DetailByUserId(userId int64, keyType string) (*AppKeyDetail,
 
 	appKeyDetail := AppKeyDetail{}
 	if err != nil {
-		fmt.Println("appKey info err:", err)
+		fmt.Println("app Key info err:", err)
 		return &appKeyDetail, err
 	}
 
