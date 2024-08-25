@@ -37,7 +37,7 @@ func (this *Usage) List(userId int64, productType, timeType string) (error, *[]t
 
 	bytesResult, err := component_shipinlv_lib.SubsystemLongVideoSales(
 		userId,
-		"product/usage",
+		"system/product/usage",
 		&query,
 		&result,
 	)
