@@ -8,7 +8,7 @@ type UsageListQuery struct {
 type UsageList struct {
 	Time        string `json:"time"`
 	FailCount   int    `json:"failCount"`
-	FinishCount int    `json:"FinishCount"`
+	FinishCount int    `json:"finishCount"`
 }
 
 type UsageListResult struct {
