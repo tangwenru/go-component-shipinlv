@@ -43,7 +43,7 @@ func (this *Usage) List(userId int64, productType, timeType string) (error, *[]t
 	)
 
 	if err != nil {
-		fmt.Println("UserUsage Detail:", string(bytesResult))
+		fmt.Println("UserUsage Detail :", string(bytesResult))
 		//json.Unmarshal(bytesResult, &userUsageDetail)
 		return err, nil
 	}
