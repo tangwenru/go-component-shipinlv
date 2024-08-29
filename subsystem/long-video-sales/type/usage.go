@@ -25,6 +25,7 @@ type UsageDetailQuery struct {
 }
 
 type UsageDetail struct {
+	UserId                  int64  `json:"userId"`
 	UserIdKey               string `json:"userIdKey"`
 	ProductType             string `json:"productType"`
 	ProductName             string `json:"productName"`
