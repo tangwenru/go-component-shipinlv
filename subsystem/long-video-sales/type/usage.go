@@ -21,7 +21,7 @@ type UsageListResult struct {
 
 type UsageDetailQuery struct {
 	ProductType string `json:"productType"`
-	UserKey     string `json:"userKey"`
+	UserId      int64  `json:"userId"`
 }
 
 type UsageDetail struct {
@@ -40,7 +40,7 @@ type UsageDetailResult struct {
 }
 
 type UsageEditQuery struct {
-	UserKey     string `json:"userKey"`
+	UserId      int64  `json:"userId"`
 	ProductType string `json:"productType"`
 	CanUseCount int    `json:"canUseCount"`
 }

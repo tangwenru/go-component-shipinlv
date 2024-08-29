@@ -50,10 +50,10 @@ func (this *Usage) List(userId int64, productType, timeType string) (error, *[]t
 	return nil, &result.Data
 }
 
-func (this *Usage) Detail(dealerId int64, productType, userKey string) (error, *typeLongVideoSales.UsageDetail) {
+func (this *Usage) Detail(dealerId int64, userId int64, productType string) (error, *typeLongVideoSales.UsageDetail) {
 	query := typeLongVideoSales.UsageDetailQuery{
 		ProductType: productType,
-		UserKey:     userKey,
+		UserId:      userId,
 	}
 	result := typeLongVideoSales.UsageDetailResult{}
 
@@ -73,9 +73,9 @@ func (this *Usage) Detail(dealerId int64, productType, userKey string) (error, *
 }
 
 // 经销商 修改
-func (this *Usage) Edit(dealerId int64, userKey, productType string, canUseCount int) error {
+func (this *Usage) Edit(dealerId int64, userId int64, productType string, canUseCount int) error {
 	query := typeLongVideoSales.UsageEditQuery{
-		UserKey:     userKey,
+		UserId:      userId,
 		ProductType: productType,
 		CanUseCount: canUseCount,
 	}
