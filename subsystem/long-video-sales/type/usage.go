@@ -24,7 +24,7 @@ type UsageDetailQuery struct {
 }
 
 type UsageDetail struct {
-	Id                      int64  `json:"id"`
+	IdKey                   string `json:"idKey"`
 	ProductType             string `json:"productType"`
 	ProductName             string `json:"productName"`
 	CanUseCount             int64  `json:"canUseCount"`
@@ -36,4 +36,15 @@ type UsageDetailResult struct {
 	Success bool        `json:"success"`
 	Message string      `json:"message"`
 	Data    UsageDetail `json:"data"`
+}
+
+// ///
+type UsageEditQuery struct {
+	ProductType string `json:"productType"`
+	CanUseCount int    `json:"canUseCount"`
+}
+
+type UsageEditResult struct {
+	Success bool   `json:"success"`
+	Message string `json:"message"`
 }

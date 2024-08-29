@@ -70,3 +70,26 @@ func (this *Usage) Detail(userId int64, productType string) (error, *typeLongVid
 
 	return nil, &result.Data
 }
+
+// 经销商 修改
+func (this *Usage) Edit(userId int64, productType string, canUseCount int) error {
+	query := typeLongVideoSales.UsageEditQuery{
+		ProductType: productType,
+		CanUseCount: canUseCount,
+	}
+	result := typeLongVideoSales.UsageEditResult{}
+
+	bytesResult, err := component_shipinlv_lib.SubsystemLongVideoSales(
+		userId,
+		"system/productUsage/edit",
+		&query,
+		&result,
+	)
+
+	if err != nil {
+		fmt.Println("UserUsage edit :", string(bytesResult))
+		return err
+	}
+
+	return nil
+}
