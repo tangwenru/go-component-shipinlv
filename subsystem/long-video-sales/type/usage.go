@@ -16,3 +16,23 @@ type UsageListResult struct {
 	Message string      `json:"message"`
 	Data    []UsageList `json:"data"`
 }
+
+///////
+
+type UsageDetailQuery struct {
+	ProductType string `json:"productType"`
+}
+
+type UsageDetail struct {
+	Id               int64  `json:"id"`
+	ProductType      string `json:"productType"`
+	ProductName      string `json:"productName"`
+	CanUseCount      int64  `json:"canUseCount"`
+	AlreadyUsedCount int64  `json:"alreadyUsedCount"`
+}
+
+type UsageDetailResult struct {
+	Success bool        `json:"success"`
+	Message string      `json:"message"`
+	Data    UsageDetail `json:"data"`
+}

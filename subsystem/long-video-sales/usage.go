@@ -50,3 +50,25 @@ func (this *Usage) List(userId int64, productType, timeType string) (error, *[]t
 
 	return nil, &result.Data
 }
+
+func (this *Usage) Detail(userId int64, productType string) (error, *typeLongVideoSales.UsageDetail) {
+	query := typeLongVideoSales.UsageDetailQuery{
+		ProductType: productType,
+	}
+	result := typeLongVideoSales.UsageDetailResult{}
+
+	bytesResult, err := component_shipinlv_lib.SubsystemLongVideoSales(
+		userId,
+		"system/productUsage/detail",
+		&query,
+		&result,
+	)
+
+	if err != nil {
+		fmt.Println("UserUsage Detail :", string(bytesResult))
+		//json.Unmarshal(bytesResult, &userUsageDetail)
+		return err, nil
+	}
+
+	return nil, &result.Data
+}
