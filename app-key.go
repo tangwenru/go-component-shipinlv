@@ -36,7 +36,7 @@ func (this *AppKey) DetailByUserId(userId int64, keyType string) (*AppKeyDetail,
 
 	appKeyDetail := AppKeyDetail{}
 	if err != nil {
-		fmt.Println("app Key info err:", err)
+		fmt.Println("app key info err:", err)
 		return &appKeyDetail, err
 	}
 
