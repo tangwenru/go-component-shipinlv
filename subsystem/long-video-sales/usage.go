@@ -43,7 +43,7 @@ func (this *Usage) List(userId int64, productType, timeType string) (error, *[]t
 	)
 
 	if err != nil {
-		fmt.Println("UserUsage Detail :", string(bytesResult))
+		fmt.Println("User Usage Detail :", string(bytesResult))
 		return err, nil
 	}
 
@@ -64,7 +64,7 @@ func (this *Usage) Detail(userId int64, productType string) (error, *typeLongVid
 	)
 
 	if err != nil {
-		fmt.Println("UserUsage Detail :", string(bytesResult))
+		fmt.Println("User Usage Detail :", string(bytesResult))
 		return err, nil
 	}
 
@@ -87,7 +87,7 @@ func (this *Usage) Edit(userId int64, productType string, canUseCount int) error
 	)
 
 	if err != nil {
-		fmt.Println("UserUsage edit :", string(bytesResult))
+		fmt.Println("User Usage edit :", string(bytesResult))
 		return err
 	}
 
