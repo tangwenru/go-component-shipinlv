@@ -111,7 +111,7 @@ func (this *AudioToText) ApiResult2Srt(lineMaxLetter int, data *AudioToTextApiRe
 		textListLen := len(textList)
 		timestampListLen := len(timestampList)
 		//对齐
-		//文本太长
+		// 文本 太长
 		if textListLen > timestampListLen {
 			textList = textList[0:timestampListLen]
 		} else if textListLen < timestampListLen {

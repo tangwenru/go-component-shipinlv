@@ -61,7 +61,7 @@ func (this *User) DetailByOneClient(userId int64, productType, clientUniqueKey s
 
 	userDetail := UserDetail{}
 	if err != nil {
-		fmt.Println("shiPinLv user info err:", err)
+		fmt.Println("shi Pin Lv user info err:", err)
 		return err, &userDetail
 	}
 

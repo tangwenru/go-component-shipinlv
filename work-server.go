@@ -42,7 +42,7 @@ func (this *WorkServer) RandDetail(userId int64, workType string) (*WorkServerDe
 	bytesResult, err := component_shipinlv_lib.MainSystem(userId, "workServer/randDetail", &query, &vipListResult)
 
 	if err != nil {
-		fmt.Println("WorkServer RandDetail err:", string(bytesResult), err)
+		fmt.Println("Work Server RandDetail err:", string(bytesResult), err)
 	}
 
 	if !vipListResult.Success {

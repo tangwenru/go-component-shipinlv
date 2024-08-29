@@ -42,20 +42,9 @@ func (this *UserVip) Detail(userId int64, productType string) (error, *UserVipDe
 	bytesResult, err := component_shipinlv_lib.MainSystem(userId, "userVip/detail", &query, &userVipDetail)
 
 	if err != nil {
-		fmt.Println("UserVip) Detail:", string(bytesResult))
+		fmt.Println("UserVip Detail:", string(bytesResult))
 		//json.Unmarshal(bytesResult, &userVipDetail)
 	}
 
 	return err, &userVipDetail
 }
-
-//func (this *UserVip) List(userId int64) *global.DataResultModel {
-//	bytesResult, err := component_shipinlv_lib.ApiGet(userId, "userVip/list", "")
-//	userVipDetail := global.DataResultModel{}
-//
-//	if err != nil {
-//		json.Unmarshal(bytesResult, &userVipDetail)
-//	}
-//
-//	return &userVipDetail
-//}
