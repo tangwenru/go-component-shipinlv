@@ -21,6 +21,7 @@ type UsageListResult struct {
 
 type UsageDetailQuery struct {
 	ProductType string `json:"productType"`
+	UserKey     string `json:"userKey"`
 }
 
 type UsageDetail struct {
@@ -38,8 +39,8 @@ type UsageDetailResult struct {
 	Data    UsageDetail `json:"data"`
 }
 
-// ///
 type UsageEditQuery struct {
+	UserKey     string `json:"userKey"`
 	ProductType string `json:"productType"`
 	CanUseCount int    `json:"canUseCount"`
 }
