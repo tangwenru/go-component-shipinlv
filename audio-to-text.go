@@ -48,7 +48,7 @@ type AudioToTextApiResult struct {
 }
 
 func (this *AudioToText) Create(userId int64, query *AudioToTextCreateQuery) (*AudioToTextDetail, error) {
-	// 先找一个 服务器
+	// 先找 一个 服务器
 	workServer := WorkServer{}
 	workServerDetail, errWorkServerDetail := workServer.RandDetail(userId, "audio-to-text")
 	if errWorkServerDetail != nil {
