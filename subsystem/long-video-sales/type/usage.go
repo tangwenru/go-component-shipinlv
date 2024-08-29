@@ -24,11 +24,12 @@ type UsageDetailQuery struct {
 }
 
 type UsageDetail struct {
-	Id               int64  `json:"id"`
-	ProductType      string `json:"productType"`
-	ProductName      string `json:"productName"`
-	CanUseCount      int64  `json:"canUseCount"`
-	AlreadyUsedCount int64  `json:"alreadyUsedCount"`
+	Id                      int64  `json:"id"`
+	ProductType             string `json:"productType"`
+	ProductName             string `json:"productName"`
+	CanUseCount             int64  `json:"canUseCount"`
+	AlreadyUsedCount        int64  `json:"alreadyUsedCount"`
+	HistoryAlreadyUsedCount int64  `json:"historyAlreadyUsedCount"`
 }
 
 type UsageDetailResult struct {
