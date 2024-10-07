@@ -17,7 +17,6 @@ func (this *VideoTopic) TopicList(
 	userId int64,
 	query *typeVideoTopic.VideoTopicTopicListQuery,
 ) (error, *[]typeVideoTopic.VideoTopicTopicList) {
-
 	result := typeVideoTopic.VideoTopicListResult{}
 
 	bytesResult, err := component_shipinlv_lib.SubsystemVideoPublish(
@@ -28,7 +27,7 @@ func (this *VideoTopic) TopicList(
 	)
 
 	if err != nil {
-		fmt.Println("User VideoTopic Detail :", string(bytesResult))
+		fmt.Println("VideoTopic list :", string(bytesResult))
 		return err, nil
 	}
 
