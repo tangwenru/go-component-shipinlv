@@ -9,8 +9,9 @@ type VideoTopicTopicList struct {
 }
 
 type VideoTopicTopicListQuery struct {
-	GroupId int64 `json:"groupId,omitempty"`
-	Enabled bool  `json:"enabled,omitempty"`
+	GroupId    int64  `json:"groupId,omitempty"`
+	TopicCount []int  `json:"topicCount"`
+	Enabled    string `json:"enabled,omitempty"` // true | false | ''
 }
 
 type VideoTopicListResult struct {
