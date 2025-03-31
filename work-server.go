@@ -59,6 +59,12 @@ type WorkServerDetail struct {
 	Updated                  int64  `json:"updated"`
 }
 
+type WorkServerUpLastWorkTaskTimeQuery struct {
+	WorkServerId int64  `json:"workServerId"`
+	UpColName    string `json:"upColName"`
+	UpTime       int64  `json:"upTime"`
+}
+
 func init() {
 
 }
@@ -89,6 +95,31 @@ func (this *WorkServer) Detail(userId, id int64) (*WorkServerDetail, error) {
 	vipListResult := WorkServerDetailResult{}
 
 	bytesResult, err := component_shipinlv_lib.MainSystem(userId, "workServer/detail", &query, &vipListResult)
+
+	if err != nil {
+		fmt.Println("Work Server Detail err:", string(bytesResult), err)
+	}
+
+	if !vipListResult.Success {
+		return nil, errors.New(vipListResult.Message)
+	}
+
+	return &vipListResult.Data, err
+}
+
+func (this *WorkServer) UpLastWorkTaskTime(
+	workServerId int64,
+	upColName string,
+	upTime int64,
+) (*WorkServerDetail, error) {
+	query := WorkServerUpLastWorkTaskTimeQuery{
+		WorkServerId: workServerId,
+		UpColName:    upColName,
+		UpTime:       upTime,
+	}
+	vipListResult := WorkServerDetailResult{}
+
+	bytesResult, err := component_shipinlv_lib.MainSystem(0, "workServer/detail", &query, &vipListResult)
 
 	if err != nil {
 		fmt.Println("Work Server Detail err:", string(bytesResult), err)
