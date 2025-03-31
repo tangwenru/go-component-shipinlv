@@ -90,7 +90,7 @@ func (this *WorkServer) RandDetail(userId int64, workType string) (*WorkServerRa
 		return nil, errors.New(vipListResult.Message)
 	}
 
-	return &vipListResult.Data, err
+	return &vipListResult.Data, nil
 }
 
 func (this *WorkServer) Detail(userId, id int64) (*WorkServerDetail, error) {
@@ -99,6 +99,10 @@ func (this *WorkServer) Detail(userId, id int64) (*WorkServerDetail, error) {
 	}
 	vipListResult := WorkServerDetailResult{}
 
+	if id <= 0 {
+		return &WorkServerDetail{}, nil
+	}
+
 	bytesResult, err := component_shipinlv_lib.MainSystem(userId, "workServer/detail", &query, &vipListResult)
 
 	if err != nil {
@@ -106,10 +110,10 @@ func (this *WorkServer) Detail(userId, id int64) (*WorkServerDetail, error) {
 	}
 
 	if !vipListResult.Success {
-		return nil, errors.New(vipListResult.Message)
+		return &WorkServerDetail{}, errors.New(vipListResult.Message)
 	}
 
-	return &vipListResult.Data, err
+	return &vipListResult.Data, nil
 }
 
 func (this *WorkServer) UpLastWorkTaskTime(
@@ -128,10 +132,11 @@ func (this *WorkServer) UpLastWorkTaskTime(
 
 	if err != nil {
 		fmt.Println("Work Server Detail err:", string(bytesResult), err)
+		return err
 	}
 
 	if !vipListResult.Success {
-		return errors.New(vipListResult.Message)
+		return errors.New("WorkServer UpLastWorkTaskTime:" + vipListResult.Message)
 	}
 
 	return nil
