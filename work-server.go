@@ -128,7 +128,7 @@ func (this *WorkServer) UpLastWorkTaskTime(
 	}
 	vipListResult := WorkServerUpLastWorkTaskTimeResult{}
 
-	bytesResult, err := component_shipinlv_lib.MainSystem(0, "workServer/detail", &query, &vipListResult)
+	bytesResult, err := component_shipinlv_lib.MainSystem(0, "workServer/upLastWorkTaskTime", &query, &vipListResult)
 
 	if err != nil {
 		fmt.Println("Work Server Detail err:", string(bytesResult), err)
