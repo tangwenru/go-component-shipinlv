@@ -133,7 +133,7 @@ func (this *WorkServer) List(userId int64) (*[]WorkServerDetail, error) {
 	bytesResult, err := component_shipinlv_lib.MainSystem(userId, "workServer/list", &query, &vipListResult)
 
 	if err != nil {
-		fmt.Println("Work Server List err:", string(bytesResult), err)
+		fmt.Println("work Server List err:", string(bytesResult), err)
 	}
 
 	if !vipListResult.Success {
