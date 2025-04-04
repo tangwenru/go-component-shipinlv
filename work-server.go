@@ -70,6 +70,16 @@ type WorkServerUpLastWorkTaskTimeResult struct {
 	Message string `json:"message"`
 }
 
+// /////////
+type WorkServerListQuery struct {
+}
+
+type WorkServerListResult struct {
+	Success bool               `json:"success"`
+	Message string             `json:"message"`
+	Data    []WorkServerDetail `json:"data"`
+}
+
 func init() {
 
 }
@@ -111,6 +121,27 @@ func (this *WorkServer) Detail(userId, id int64) (*WorkServerDetail, error) {
 
 	if !vipListResult.Success {
 		return &WorkServerDetail{}, errors.New(vipListResult.Message)
+	}
+
+	return &vipListResult.Data, nil
+}
+
+func (this *WorkServer) List(userId, id int64) (*[]WorkServerDetail, error) {
+	query := WorkServerListQuery{}
+	vipListResult := WorkServerListResult{}
+
+	if id <= 0 {
+		return &[]WorkServerDetail{}, nil
+	}
+
+	bytesResult, err := component_shipinlv_lib.MainSystem(userId, "workServer/list", &query, &vipListResult)
+
+	if err != nil {
+		fmt.Println("Work Server List err:", string(bytesResult), err)
+	}
+
+	if !vipListResult.Success {
+		return &[]WorkServerDetail{}, errors.New(vipListResult.Message)
 	}
 
 	return &vipListResult.Data, nil
