@@ -126,13 +126,9 @@ func (this *WorkServer) Detail(userId, id int64) (*WorkServerDetail, error) {
 	return &vipListResult.Data, nil
 }
 
-func (this *WorkServer) List(userId, id int64) (*[]WorkServerDetail, error) {
+func (this *WorkServer) List(userId int64) (*[]WorkServerDetail, error) {
 	query := WorkServerListQuery{}
 	vipListResult := WorkServerListResult{}
-
-	if id <= 0 {
-		return &[]WorkServerDetail{}, nil
-	}
 
 	bytesResult, err := component_shipinlv_lib.MainSystem(userId, "workServer/list", &query, &vipListResult)
 
