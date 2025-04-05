@@ -1,6 +1,7 @@
 package subsystemLongVIdeoSales
 
 import (
+	"errors"
 	"fmt"
 	component_shipinlv_lib "github.com/tangwenru/go-component-shipinlv/lib"
 	typeClothLogo "github.com/tangwenru/go-component-shipinlv/subsystem/cloth-logo/type"
@@ -44,6 +45,10 @@ func (this *UsageLimit) Create(userId int64, query *UsageLimitCreateQuery) error
 	if err != nil {
 		fmt.Println("User UsageLimit edit :", string(bytesResult))
 		return err
+	}
+
+	if !result.Success {
+		return errors.New(result.Message)
 	}
 
 	return nil
