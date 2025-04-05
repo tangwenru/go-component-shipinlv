@@ -40,6 +40,14 @@ func SubsystemLongVideoSales(userId int64, apiPath string, data interface{}, res
 	return ApiGet(userId, apiUrl, apiPath, data, result)
 }
 
+func SubsystemClothLogo(userId int64, apiPath string, data interface{}, result interface{}) ([]byte, error) {
+	apiUrl, _ := beego.AppConfig.String("SubSystem.ClothLogoAPIUrl")
+	if len(apiUrl) < 5 {
+		return nil, errors.New("请配置 app.conf 文件的 SubSystem.ClothLogoAPIUrl")
+	}
+	return ApiGet(userId, apiUrl, apiPath, data, result)
+}
+
 func SubsystemVideoPublish(userId int64, apiPath string, data interface{}, result interface{}) ([]byte, error) {
 	apiUrl, _ := beego.AppConfig.String("Subsystem.VideoPublishAPIUrl")
 	if len(apiUrl) < 5 {
