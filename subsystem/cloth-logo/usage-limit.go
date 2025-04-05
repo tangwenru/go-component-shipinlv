@@ -31,6 +31,7 @@ func init() {
 
 }
 
+// 暂时不用了，main 直接访问
 func (this *UsageLimit) Create(userId int64, query *UsageLimitCreateQuery) error {
 
 	result := typeClothLogo.UsageLimitCreateResult{}
