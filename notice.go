@@ -30,7 +30,7 @@ func Notice(query *NoticeCreateQuery) error {
 
 	token := lib.MakeToken(noticeToken)
 
-	req := httplib.Post("https://api-notice.shipinlv.com/notice/create")
+	req := httplib.Post("https://api-notice.shipinlv.com/notice/create?_token_=" + token)
 	req.SetTLSClientConfig(&tls.Config{InsecureSkipVerify: true})
 
 	req.Header("Content-Type", "application/json")
