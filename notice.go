@@ -6,6 +6,8 @@ import (
 	"errors"
 	"fmt"
 	"github.com/beego/beego/v2/client/httplib"
+	"github.com/beego/beego/v2/server/web"
+	"github.com/tangwenru/go-component-shipinlv/lib"
 )
 
 type NoticeCreateQuery struct {
@@ -20,13 +22,20 @@ type NoticeCreateResult struct {
 	Message string `json:"message"`
 }
 
-func Notice(noticeToken string, query *NoticeCreateQuery) error {
+func Notice(query *NoticeCreateQuery) error {
+	noticeToken, _ := web.AppConfig.String("AesKey.notice")
+	if noticeToken == "" {
+		return errors.New("请配置：AesKey.notice")
+	}
+
+	token := lib.MakeToken(noticeToken)
+
 	req := httplib.Post("https://api-notice.shipinlv.com/notice/create")
 	req.SetTLSClientConfig(&tls.Config{InsecureSkipVerify: true})
 
 	req.Header("Content-Type", "application/json")
 
-	req.Param("_token_", noticeToken)
+	req.Param("_token_", token)
 
 	dataByte, err := json.Marshal(query)
 	req.Body(dataByte)
