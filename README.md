@@ -5,3 +5,8 @@
 
 子系统访问主系统配置，子系统配置：
 - ShiPinLv.APIUrl
+
+
+```shell
+GOPRIVATE=github.com/tangwenru go get -u github.com/tangwenru/go-component-shipinlv
+```
