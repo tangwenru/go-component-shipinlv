@@ -11,10 +11,8 @@ import (
 )
 
 type NoticeCreateQuery struct {
-	UserIdList  []string `json:"userIdList"`
-	PartyIdList []string `json:"partyIdList"`
-	ChatId      string   `json:"chatId"`
-	Text        string   `json:"text"`
+	PlanId int64  `json:"planId"`
+	Text   string `json:"text"`
 }
 
 type NoticeCreateResult struct {
@@ -22,15 +20,21 @@ type NoticeCreateResult struct {
 	Message string `json:"message"`
 }
 
-func Notice(query *NoticeCreateQuery) error {
-	noticeToken, _ := web.AppConfig.String("AesKey.notice")
-	if noticeToken == "" {
+func Notice(userId int64, query *NoticeCreateQuery, expire int64) error {
+	noticeAes, _ := web.AppConfig.String("AesKey.notice")
+	if noticeAes == "" {
 		return errors.New("请配置：AesKey.notice")
 	}
+	runMode, _ := web.AppConfig.String("RunMode")
 
-	token := lib.MakeToken(noticeToken)
+	apiUrl := "https://api-notice.shipinlv.com/notice/create"
+	if runMode == "dev" {
+		apiUrl = "http://127.0.0.1:51817"
+	}
 
-	req := httplib.Post("https://api-notice.shipinlv.com/notice/create?_token_=" + token)
+	token := lib.MakeSid(noticeAes, "u", userId, expire)
+
+	req := httplib.Post(apiUrl + "?_token_=" + token)
 	req.SetTLSClientConfig(&tls.Config{InsecureSkipVerify: true})
 
 	req.Header("Content-Type", "application/json")

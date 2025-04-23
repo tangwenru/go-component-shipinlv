@@ -1,7 +1,6 @@
 package lib
 
 import (
-	"errors"
 	"fmt"
 )
 
@@ -21,24 +20,17 @@ type SidDetail struct {
 	UserId int64 `json:"userId"`
 }
 
-func GetRoleId(roleType string, sid string) (int64, error) {
-	sidDetailResult := SidDetailResult{}
-	query := map[string]string{
-		"roleType": roleType,
-		"sid":      sid,
-	}
-	_, err := MainSystem(0, "user/sidInfo", &query, &sidDetailResult)
-
-	if err != nil {
-		fmt.Println("shiPinLv GetRoleId err:", err)
-		return 0, err
-	}
-
-	if !sidDetailResult.Success {
-		return 0, errors.New(sidDetailResult.Message)
-	}
-
-	userDetail := sidDetailResult.Data
-
-	return userDetail.UserId, nil
+func MakeSid(aesKey, roleType string, roleId, expire int64) string {
+	// 999_u:123_999 , 随机数，是为了解决 AES 加密部分不变的 "不友好"
+	randNum1 := RandWord(5, "")
+	randNum2 := RandWord(5, "")
+	//text := randNum1 + "_" + roleType + ":" + global.Int64ToString(roleId) + "_" + randNum2
+	text := fmt.Sprintf("%s_%s:%d:%d_%s",
+		randNum1,
+		roleType,
+		roleId,
+		expire,
+		randNum2,
+	)
+	return EncryptText(text, aesKey)
 }
