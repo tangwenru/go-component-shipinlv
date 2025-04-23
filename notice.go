@@ -28,7 +28,7 @@ func Notice(userId int64, query *NoticeCreateQuery, expire int64) error {
 	runMode, _ := web.AppConfig.String("RunMode")
 
 	apiUrl := "https://api-notice.shipinlv.com/notice/create"
-	if runMode == "dev" {
+	if runMode == "local" {
 		apiUrl = "http://127.0.0.1:51817"
 	}
 
