@@ -36,7 +36,7 @@ func Notice(userId int64, query *NoticeCreateQuery, expire int64) error {
 
 	token := lib.MakeSid(noticeAes, "u", userId, expire)
 
-	req := httplib.Post(apiUrl + "/notice/create?_token_=" + token)
+	req := httplib.Post(apiUrl + "/user/notice/create?_token_=" + token)
 	req.SetTLSClientConfig(&tls.Config{InsecureSkipVerify: true})
 
 	req.Header("Content-Type", "application/json")
