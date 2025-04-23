@@ -27,14 +27,16 @@ func Notice(userId int64, query *NoticeCreateQuery, expire int64) error {
 	}
 	runMode, _ := web.AppConfig.String("RunMode")
 
-	apiUrl := "https://api-notice.shipinlv.com/notice/create"
+	apiUrl := "https://api-notice.shipinlv.com"
 	if runMode == "local" {
 		apiUrl = "http://127.0.0.1:51817"
 	}
 
+	fmt.Println("notice runMode:", runMode)
+
 	token := lib.MakeSid(noticeAes, "u", userId, expire)
 
-	req := httplib.Post(apiUrl + "?_token_=" + token)
+	req := httplib.Post(apiUrl + "/notice/create?_token_=" + token)
 	req.SetTLSClientConfig(&tls.Config{InsecureSkipVerify: true})
 
 	req.Header("Content-Type", "application/json")
@@ -51,7 +53,10 @@ func Notice(userId int64, query *NoticeCreateQuery, expire int64) error {
 	}
 
 	resultData := NoticeCreateResult{}
-	json.Unmarshal(byteResult, &resultData)
+	errJson := json.Unmarshal(byteResult, &resultData)
+	if errJson != nil {
+		return errors.New("发送结果序列化失败：" + errJson.Error())
+	}
 
 	if !resultData.Success {
 		return errors.New("发送结果失败：" + resultData.Message)
