@@ -90,7 +90,7 @@ func (this *AudioToText) Create(userId int64, query *AudioToTextCreateQuery) (*A
 		return nil, errors.New("识别字幕失败 1：" + resultData.Message)
 	}
 
-	fmt.Println("api:", resultData)
+	//fmt.Println("api:", resultData)
 	outDetail := AudioToTextDetail{
 		WorkServerId: workServerDetail.Id,
 		SrtText:      this.ApiResult2Srt(query.LineMaxLetter, &resultData),
